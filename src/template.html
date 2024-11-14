@@ -3,7 +3,294 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <nav class="sidebar">
+      <ul>
+        <li class="sidebar-logo sidebar-section">
+          <span>todos</span>
+          <button class="collapse-btn">
+            <span class="icon material-symbols-outlined">west</span>
+          </button>
+        </li>
+        <div class="general-separator"></div>
+
+        <!-- ADD NEW TODO BUTTON -->
+        <li>
+          <a href="#" id="new-todo-dialog-open">
+            <span class="icon material-symbols-outlined">add_circle</span>
+            <span class="text-white-shadow">ADD NEW TODO</span>
+          </a>
+        </li>
+        <div class="general-separator"></div>
+
+        <!-- MAIN CATEGORIES -->
+        <div class="sidebar-links">
+          <li data-list-title="all">
+            <a href="#" class="sidebar-link">
+              <span class="icon material-symbols-outlined">home_storage</span>
+              <span>All</span>
+            </a>
+          </li>
+
+          <li data-list-title="pending">
+            <a href="#" class="sidebar-link">
+              <span class="icon material-symbols-outlined">
+                pending_actions
+              </span>
+              <span>Pending</span>
+            </a>
+          </li>
+
+          <li data-list-title="completed">
+            <a href="#" class="sidebar-link">
+              <span class="icon material-symbols-outlined"> check_circle </span>
+              <span>Completed</span>
+            </a>
+          </li>
+          <div class="general-separator"></div>
+
+          <!-- PROJECT CATEGORIES -->
+          <li class="sidebar-projects sidebar-section">
+            <span>Projects</span>
+            <button id="new-project-open-btn">
+              <span class="icon material-symbols-outlined">add</span>
+            </button>
+          </li>
+        </div>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <h1></h1>
+      <ul class="todo-container"></ul>
+    </main>
+
+    <!-- Modal Windows -->
+    <dialog id="new-todo-dialog">
+      <h2>New Todo</h2>
+
+      <div class="general-separator"></div>
+
+      <form method="dialog" id="new-todo-form">
+        <div>
+          <label for="new-todo-title">Title</label>
+          <input
+            type="text"
+            name="new-todo-title"
+            id="new-todo-title"
+            placeholder="Buy groceries for the week"
+            autocomplete="off"
+            autofocus
+            required
+          />
+        </div>
+
+        <div>
+          <label for="new-todo-description">Description</label>
+          <textarea
+            name="new-todo-description"
+            id="new-todo-description"
+            placeholder="Go to the nearest shop after making the grocery list.."
+          ></textarea>
+        </div>
+
+        <div class="form-details">
+          <div>
+            <label for="new-todo-due-date">Due</label>
+            <input
+              type="date"
+              name="new-todo-due-date"
+              id="new-todo-due-date"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="new-todo-priority">Priority</label>
+            <select name="new-todo-priority" id="new-todo-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="new-todo-project">Project</label>
+            <select name="new-todo-project" id="new-todo-project">
+              <option value="home">Home</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-controls">
+          <div>
+            <button
+              type="submit"
+              class="new-todo-submit-btn"
+              id="new-todo-submit-btn"
+            >
+              Add
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              class="new-todo-dialog-close"
+              id="new-todo-dialog-close"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="new-project-dialog">
+      <h2>New Project</h2>
+
+      <div class="general-separator"></div>
+
+      <form method="dialog" id="new-project-form">
+        <div>
+          <label for="project-title">Title</label>
+          <input
+            type="text"
+            name="project-title"
+            id="project-title"
+            placeholder="Work"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form-controls">
+          <div>
+            <button
+              type="submit"
+              class="new-project-submit-btn"
+              id="new-project-submit-btn"
+            >
+              Add
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              class="new-project-close-btn"
+              id="new-project-close-btn"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="edit-todo-dialog">
+      <h2>Update Todo</h2>
+
+      <div class="general-separator"></div>
+
+      <form method="dialog" id="edit-todo-form">
+        <div>
+          <label for="edit-todo-title">Title</label>
+          <input
+            type="text"
+            name="edit-todo-title"
+            id="edit-todo-title"
+            value=""
+            required
+          />
+        </div>
+
+        <div>
+          <label for="edit-todo-description">Description</label>
+          <textarea
+            name="edit-todo-description"
+            id="edit-todo-description"
+          ></textarea>
+        </div>
+
+        <div class="form-details">
+          <div>
+            <label for="edit-todo-due-date">Due</label>
+            <input
+              type="date"
+              name="edit-todo-due-date"
+              id="edit-todo-due-date"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="edit-todo-priority">Priority</label>
+            <select name="edit-todo-priority" id="edit-todo-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="edit-todo-project">Project</label>
+            <select name="edit-todo-project" id="edit-todo-project">
+              <option value="home">Home</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-controls">
+          <div>
+            <button
+              type="submit"
+              class="edit-todo-submit-btn"
+              id="edit-todo-submit-btn"
+            >
+              Update
+            </button>
+          </div>
+
+          <div>
+            <button type="button" id="edit-todo-dialog-close">Close</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="remove-todo-dialog">
+      <h2>Remove Todo</h2>
+
+      <div class="general-separator"></div>
+
+      <div class="form-controls">
+        <div>
+          <button
+            type="submit"
+            class="remove-todo-submit-btn"
+            id="remove-todo-submit-btn"
+          >
+            Remove
+          </button>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            class="remove-todo-dialog-close"
+            id="remove-todo-dialog-close"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </dialog>
+  </body>
 </html>
