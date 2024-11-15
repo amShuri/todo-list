@@ -1,37 +1,39 @@
-class TodoList {
+export class TodoList {
   constructor() {
-    this.Home = [];
+    this.todos = [];
+    this.groups = ["home", "shop"];
   }
 
-  createCategory(categoryName) {
-    if (!this[categoryName]) {
-      this[categoryName] = [];
+  addTodoGroup(groupName) {
+    if (!this.groups.includes(groupName.toLowerCase())) {
+      this.groups.push(groupName);
     }
   }
 
-  addTodo(todo, category) {
-    if (this[category]) {
-      this[category].push(todo);
-    }
+  removeTodoGroup(groupName) {
+    const index = this.groups.findIndex((group) => group === groupName);
+    this.groups.splice(index, 1);
   }
 
-  deleteTodo(todo, category) {
-    const index = this[category].findIndex(
-      (currTodo) => currTodo.id === todo.id
-    );
-    this[category].splice(index, 1);
+  addTodo(todo) {
+    this.todos.push(todo);
+  }
+
+  removeTodo(todo) {
+    const index = this.todos.findIndex((currTodo) => currTodo.id === todo.id);
+    this.todos.splice(index, 1);
   }
 }
 
-class Todo {
+export class Todo {
   static id = 0;
-  constructor(title, description, dueDate, priority, status, category) {
+  constructor(title, description, dueDate, priority, status, group) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.status = status;
-    this.category = category;
+    this.group = group;
     this.id = Todo.id++;
   }
 }
